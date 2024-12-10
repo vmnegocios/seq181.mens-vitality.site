@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 4</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Configuração do fundo e corpo */
+        body {
+            background-color: #000000; /* Preto de fundo */
+            color: #FFFFFF; /* Texto branco */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        /* Container principal do quiz */
+        .quiz-container {
+            background-color: #1E1E1E; /* Preto neutro */
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        /* Estilo da headline */
+        .headline {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        /* Pergunta e opções de resposta */
+        .question {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #E0E0E0; /* Cinza claro */
+        }
+        .options label {
+            display: block;
+            background-color: #2C2C2C;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: #FFFFFF;
+            transition: background-color 0.2s;
+        }
+        .options label:hover {
+            background-color: #333333;
+        }
+        .options input[type="radio"] {
+            display: none; /* Esconde os botões de rádio */
+        }
+    </style>
+</head>
+<body>
+<div class="quiz-container">
+    <div class="headline">Please answer this question to proceed...</div>
+    <div class="question">
+        Go to a private place because the following video contains <span style="color: red;">hot scenes</span> to explain how to achieve what you want most using a <span style="color: green;">natural</span> and <span style="color: green;">simple trick</span> with ingredients you have at home. Do you promise to watch the full <span style="color: red;">spicy</span> video?
+    </div>
+    <div class="options">
+        <label><input type="radio" name="problem" value="Yes" onclick="nextStepWithParams('https://seq180.stronghappyman.site/newpv-quiz5etp/')"> Yes</label>
+        <label><input type="radio" name="problem" value="No" onclick="nextStepWithParams('https://seq180.stronghappyman.site/newpv-quiz5etp/')"> No</label>
+    </div>
+</div>
+<script>
+    // Função para capturar parâmetros da URL
+    function getQueryParams() {
+        const query = window.location.search.substring(1);
+        const params = {};
+        query.split('&').forEach(param => {
+            const [key, value] = param.split('=');
+            params[key] = decodeURIComponent(value || '');
+        });
+        return params;
+    }
+
+    // Função para construir a URL com os parâmetros existentes
+    function buildDynamicLink(baseLink) {
+        const params = getQueryParams();
+        const queryString = new URLSearchParams(params).toString();
+        return `${baseLink}${queryString ? `?${queryString}` : ''}`;
+    }
+
+    // Função para redirecionar para o próximo passo com parâmetros
+    function nextStepWithParams(targetUrl) {
+        const dynamicLink = buildDynamicLink(targetUrl);
+        window.location.href = dynamicLink;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 1</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Configuração do fundo e corpo */
+        body {
+            background-color: #000000; /* Preto de fundo */
+            color: #FFFFFF; /* Texto branco */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        /* Container principal do quiz */
+        .quiz-container {
+            background-color: #1E1E1E; /* Preto neutro */
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        /* Estilo da headline */
+        .headline {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        /* Pergunta e opções de resposta */
+        .question {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #E0E0E0; /* Cinza claro */
+        }
+        .options label {
+            display: block;
+            background-color: #2C2C2C;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+            font-size: 14px;
+            color: #FFFFFF;
+            transition: background-color 0.2s;
+        }
+        .options label:hover {
+            background-color: #333333;
+        }
+        .options input[type="radio"] {
+            display: none; /* Esconde os botões de rádio */
+        }
+        /* Barra de progresso */
+        .progress-bar {
+            background-color: #333333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 15px 0;
+            height: 6px;
+        }
+        .progress {
+            background-color: #4CAF50; /* Verde mais escuro */
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        /* Mensagem de resultado */
+        .result-message {
+            display: none;
+            color: #FFFFFF;
+            text-align: center;
+        }
+        .result-message h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .result-message p {
+            font-size: 14px;
+            margin: 8px 0; /* Espaçamento entre as frases */
+        }
+        .result-button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .result-button:hover {
+            background-color: #0056b3;
+        }
+        .timer-container {
+            font-size: 18px; /* Maior para destaque */
+            color: #FF0000; /* Vermelho mais chamativo */
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="quiz-container">
+    <div class="headline">Please answer this question to proceed...</div>
+    <div class="question">How old are you?</div>
+    <div class="options">
+        <label><input type="radio" name="age" value="21-35" onclick="nextStepWithParams('step2.html')"> 21-35</label>
+        <label><input type="radio" name="age" value="36-50" onclick="nextStepWithParams('step2.html')"> 36-50</label>
+        <label><input type="radio" name="age" value="51-65" onclick="nextStepWithParams('step2.html')"> 51-65</label>
+        <label><input type="radio" name="age" value="66+" onclick="nextStepWithParams('step2.html')"> 66+</label>
+    </div>
+</div>
+<script>
+    // Função para capturar parâmetros da URL
+    function getQueryParams() {
+        const query = window.location.search.substring(1);
+        const params = {};
+        query.split('&').forEach(param => {
+            const [key, value] = param.split('=');
+            params[key] = decodeURIComponent(value || '');
+        });
+        return params;
+    }
+
+    // Função para construir a URL com os parâmetros existentes
+    function buildDynamicLink(baseLink) {
+        const params = getQueryParams();
+        const queryString = new URLSearchParams(params).toString();
+        return `${baseLink}${queryString ? `?${queryString}` : ''}`;
+    }
+
+    // Função para redirecionar com parâmetros
+    function nextStepWithParams(targetUrl) {
+        const dynamicLink = buildDynamicLink(targetUrl);
+        window.location.href = dynamicLink;
+    }
+</script>
+</body>
+</html>
